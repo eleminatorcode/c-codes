@@ -1,52 +1,62 @@
- #include<stdio.h>
- #include<stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
- struct stackLL
- {
-   int value;
-   struct stackLL *next;
- };
- void push(struct stackLL **head ,int value){
+struct stackLL
+{
+    int data;
+    struct stackLL* next; 
+};
 
-   struct stackLL *temp= *head;
-   struct stackLL *NewEle=(struct stackLL *)malloc(sizeof(struct stackLL));
-   
-   
-   if(temp==NULL){
+void push(struct stackLL**top,int data){
+    struct  stackLL * newNode= (struct stackLL*) malloc(sizeof(struct stackLL));
+    if(newNode==NULL){
+        printf("OVERFLOW");
+    }
+    else{
+    newNode->data=data;
+    newNode->next=(*top);
+    (*top)=newNode;
+    }
+    printf("PUSHED NUMBER IS:%d\n",data);
     
-    struct stackLL *temp=(struct stackLL *)malloc(sizeof(struct stackLL));
-    temp->value=value;
-    temp->next=NULL;
-    *head=temp;
-   }
-   NewEle->value=value;
-  NewEle->next=*head;
-  *head=NewEle;
+}
+int isEmpty(struct stackLL*top){
+     if( (top)==NULL){
+        return 1;
+     }
+     else{
+        return 0;
+     }
+}
+int pop(struct stackLL** top){
+    if(isEmpty(*top)){
+        return -1;
     }
-   void pop(struct stackLL **head){
-    struct stackLL *temp=*head;
-    *head=(*head)->next;
+    struct stackLL * temp=(*top);
+    int x=temp->data;
+    (*top)=(*top)->next;
     free(temp);
-   }
-   void printList(struct stackLL **head){
-    struct stackLL *temp=*head;
-    while(temp->next!=NULL){
-        printf("%d ",temp->value);
-        temp = temp->next;
+    return x;
+}
+int peek(struct stackLL* top){
+    if(isEmpty(top)){
+        return 0;
     }
-    printf("\n");
-   }
-   int main(){
-    struct  stackLL *head = NULL;
+    return top->data;
+}
 
-    // Push elements into the stack
-    push(&head, 10);
-    push(&head, 20);
-    push(&head, 30);
-    push(&head, 40);
-    push(&head, 50);
-    printList(&head);
-    pop(&head);
-    printList(&head);
-   }
- 
+int main(){
+    struct stackLL * top=NULL;
+    push(&top,50);
+     push(&top,60);
+     push(&top,5);
+    push(&top,8);
+     push(&top,14);
+     printf("\n");
+    int element =pop(&top);
+    printf("POPED number is:%d\n\n",element);
+    printf("TOP ELEMENT IS :%d\n\n",peek(top));
+    printf("isEmpty:%d",isEmpty(top));
+
+}
+
