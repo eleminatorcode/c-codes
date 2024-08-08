@@ -4,7 +4,8 @@
 typedef struct {
     int item [ Max_size];
     int front;
-    // int rear;
+    
+    int rear;
 
 } queue;      
 

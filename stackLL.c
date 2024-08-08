@@ -44,6 +44,15 @@ int peek(struct stackLL* top){
     }
     return top->data;
 }
+void print(struct stackLL** top){
+    if(isEmpty(*top)){
+        return -1;
+    }
+    while(top!=NULL){
+    printf("%d ",(*top)->data);
+    (*top)=(*top)->next;
+    }
+}
 
 int main(){
     struct stackLL * top=NULL;
@@ -56,7 +65,10 @@ int main(){
     int element =pop(&top);
     printf("POPED number is:%d\n\n",element);
     printf("TOP ELEMENT IS :%d\n\n",peek(top));
-    printf("isEmpty:%d",isEmpty(top));
+    printf("isEmpty:%d\n",isEmpty(top));
+   printf("Element in stack is:") ;
+   print(&top);
+    
 
 }
 
